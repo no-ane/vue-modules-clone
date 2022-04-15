@@ -1,19 +1,28 @@
 export default {
   settings: [
     {
-      appName: '子A',
       module: 'childA',
       target: 'Mother',   // 拷贝的模块
+      meta: {
+        name: '拷贝的A模块',
+        // icon: 'icon-1',
+      }
     },
     {
-      appName: '子AA',
       module: 'childAA',
       target: 'Mother',   // 拷贝的模块
+      meta: {
+        name: '拷贝的AA模块',
+        // icon: 'icon-2',
+      }
     },
     {
-      appName: '子B',
       module: 'childB',
       target: 'Mother',   // 拷贝的模块
+      meta: {
+        name: '拷贝的B模块',
+        // icon: 'icon-3',
+      }
     }
   ]
 };

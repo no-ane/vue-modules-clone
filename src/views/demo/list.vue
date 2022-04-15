@@ -1,7 +1,7 @@
 <template>
   <div>
     列表
-    <button @click="addRoute">
+    <button>
       追加路由
     </button>
 
@@ -19,10 +19,6 @@
 </template>
 
 <script>
-import Router from '@/router/index';
-import Config from '@/config';
-import ModulesClone from '@/service/clone';
-
 export default {
   name: 'List',
   data() {
@@ -52,22 +48,11 @@ export default {
     };
   },
   created() {
-    this.addRoute();
   },
   methods: {
     push(item) {
       this.$router.push(item.pathName);
     },
-    addRoute() {
-      // settings
-      for (const setting of Config.settings) {
-        ModulesClone.clone(setting);
-      }
-
-      this.$nextTick(() => {
-        console.log('Router.options.routes', Router.options.routes);
-      });
-    }
   }
 };
 </script>

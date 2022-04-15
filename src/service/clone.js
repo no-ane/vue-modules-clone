@@ -2,11 +2,10 @@ import Router from '@router';
 import modulesMethods from './methods';
 
 class ModulesClone {
-  _alreadyProxyRoute = false;
   _proxyRouteNameMap = {};
 
-  async clone (setting) {
-    const { target, module } = setting;
+  clone (setting) {
+    const { target, module, meta } = setting;
     const motherRoutes = Router.options.routes.filter(route => route.meta.module === target);
     const newRoutes = [];
 
@@ -24,7 +23,7 @@ class ModulesClone {
         ...route,
         path: newUrl,
         name: route.name + '--clone--' + module,
-        meta: { ...route.meta, module: module }
+        meta: { ...route.meta, ...meta, module: module }
       };
 
       if (!this._proxyRouteNameMap[module]) {
@@ -43,21 +42,14 @@ class ModulesClone {
    * @return {*}
    */
   proxyRoute() {
-    if (this._alreadyProxyRoute) {
-      return;
-    }
-    this._alreadyProxyRoute = true;
-    Router.beforeEach(async (routeTo, routeFrom, next) => {
+    Router.beforeEach((routeTo, routeFrom, next) => {
       // 获取当前模块
       let moduleCode = modulesMethods.getRouteModule(routeFrom);
       moduleCode = routeTo.params.module || moduleCode;
 
       const map = moduleCode && this._proxyRouteNameMap[moduleCode];
-      console.log('map', map);
       console.log('moduleCode', moduleCode);
-      console.log('this._proxyRouteNameMap', this._proxyRouteNameMap);
       if (map && map[routeTo.name]) {
-        console.log('map[routeTo.name]', map[routeTo.name]);
         const { params, query } = routeTo;
         next({ name: map[routeTo.name], params: params, query: query, replace: Router.isReplace });
       }
@@ -65,7 +57,6 @@ class ModulesClone {
       next();
     });
   }
-
 }
 
 export default new ModulesClone();

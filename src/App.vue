@@ -14,20 +14,18 @@
 </template>
 
 <script>
+import ModulesClone from '@/service/clone';
+import Config from '@/config';
+
 export default {
   name: 'App',
   data() {
-    return {
-      // transitionName: 'slide-right',
-    };
-  },
-  watch: {
-    $route() {
-      // this.transitionName = this.$router.isBack ? 'slide-right' : 'slide-left';
-    }
+    return {}
   },
   created() {
-    // this.isInit = true;
+    for (const setting of Config.settings) {
+      ModulesClone.clone(setting);
+    }
   }
 };
 </script>

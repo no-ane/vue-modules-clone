@@ -22,21 +22,25 @@ export default {
   },
   computed: {
     routeModule () {
-      const { meta } = this.$route || {};
-      return meta.module || '';
+      const { module } = this.routeMeta;
+      return module || '';
     },
+    routeMeta() {
+      return this.$route.meta || {};
+    }
   },
   created() {
-    console.log('created');
+    document.title = this.routeMeta.name || '这是一个 title ';
   },
   methods: {
     onRedirect() {
       // this.$router.push({ name: '/childA' });
+      console.log(this.routeModule)
       if (this.routeModule === 'childAA') {
-        this.$router.push({ name: 'item', params: { module: 'childA' } });
-      } else if (this.routeModule === 'childA') {
-        this.$router.push({ name: 'item', params: { module: 'childAA' } });
+        return this.$router.push({ name: 'item', params: { module: 'childA' } });
       }
+      this.$router.push({ name: 'item', params: { module: 'childAA' } });
+      console.log('here>>')
     },
     onRedirectOther() {
       this.$router.push({ name: 'other' });
