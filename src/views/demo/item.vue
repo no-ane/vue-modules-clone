@@ -1,14 +1,16 @@
 <template>
-  <div
-    id="app"
-  >
-    内容 {{ routeModule }}
-    <button @click="onRedirect">
+  <div class="container">
+    <span class="container_tt">当前路由 {{ routeModule }}</span>
+
+    <div class="btn" @click="onRedirect">
       跳转到 {{ routeModule === 'childAA' ? 'childA' : 'childAA' }}
-    </button>
-    <button @click="onRedirectOther">
+    </div>
+    <div class="btn" @click="onRedirectOther">
       跳转到other
-    </button>
+    </div>
+    <div class="btn" @click="onRedirectMother">
+      跳转到 Mother
+    </div>
   </div>
 </template>
 
@@ -35,17 +37,40 @@ export default {
   methods: {
     onRedirect() {
       // this.$router.push({ name: '/childA' });
-      console.log(this.routeModule)
+
       if (this.routeModule === 'childAA') {
         return this.$router.push({ name: 'item', params: { module: 'childA' } });
       }
-      this.$router.push({ name: 'item', params: { module: 'childAA' } });
-      console.log('here>>')
+      return this.$router.push({ name: 'item', params: { module: 'childAA' } });
+      // this.$router.push({ name: 'item', params: { module: 'childAA' } });
+      // console.log('here>>', { name: 'item', params: { module: 'childAA' } });
     },
     onRedirectOther() {
       this.$router.push({ name: 'other' });
+    },
+    onRedirectMother() {
+      this.$router.push({ name: 'item', params: { module: 'mother' }});
     }
   }
 };
 </script>
+
+<style lang="less" scoped>
+.container {
+  padding: 20px;
+}
+.btn {
+  display: block;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+
+  &:nth-of-type(2n) {
+    background-color: lightgreen;
+  }
+}
+</style>
 
