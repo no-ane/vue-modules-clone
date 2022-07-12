@@ -1,10 +1,5 @@
 <template>
   <div>
-    列表
-    <button>
-      追加路由
-    </button>
-
     <ul class="module-list">
       <li
         v-for="item in list"
@@ -24,11 +19,6 @@ export default {
   data() {
     return {
       list: [
-        {
-          appName: '母版',
-          module: 'mother',
-          pathName: 'item'
-        },
         {
           appName: '子A',
           module: 'childA',
@@ -60,16 +50,17 @@ export default {
 <style lang="less" scoped>
 
 .module-list {
-  display: flex;
 
   &__item {
-    width: 60px;
     height: 60px;
     line-height: 60px;
     text-align: center;
     border: 1px solid #ccc;
-    border-radius: 50%;
     margin: 10px;
+
+    &:nth-of-type(2n) {
+      background-color: lightgreen;
+    }
   }
 }
 </style>
