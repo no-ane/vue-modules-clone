@@ -8,9 +8,6 @@
     <div class="btn" @click="onRedirectOther">
       跳转到other
     </div>
-    <div class="btn" @click="onRedirectMother">
-      跳转到 Mother
-    </div>
   </div>
 </template>
 
@@ -48,9 +45,6 @@ export default {
     onRedirectOther() {
       this.$router.push({ name: 'other' });
     },
-    onRedirectMother() {
-      this.$router.push({ name: 'item', params: { module: 'mother' }});
-    }
   }
 };
 </script>
