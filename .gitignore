@@ -7,9 +7,6 @@ node_modules
 package-lock.json
 yarn.lock
 
-# Dev/Build Artifacts
-dist
-
 # Unconfigured Editors
 .idea
 *.suo

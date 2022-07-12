@@ -14,6 +14,7 @@ const baseConfig = {
 
 // app 配置
 const appConfig = {
+  publicPath: '/dist',
   chainWebpack: config => {
     // 图片名配置，防止出现图片重名覆盖
     config.module
